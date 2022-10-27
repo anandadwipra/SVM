@@ -1,0 +1,9 @@
+{
+  "default": {
+    "name": "default",
+    "default_user": "ananda",
+    "ssh_path": "workdir/id_rsa.pub",
+    "uuid": "5c200e8e-5112-4076-9ad9-8ce96898e9ab",
+    "workdir": "workdir"
+  }
+}
