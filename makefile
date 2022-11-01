@@ -3,10 +3,12 @@
 PROJECTNAME=$(shell basename "$(PWD)")
 
 install: go get 
-build:
+builds:
 	@mkdir -p /opt/svm
 	@cp ./configs/default.json /opt/svm/
 	@go build -o $(SVM)/svm ./cmd/svm/main.go
+clean:
+	@rm /opt/svm -rf
 build-local:
 	@go build -o bin/svm ./cmd/svm/main.go
 help: makefile 
