@@ -6,27 +6,15 @@ import (
 	"strings"
 
 	svm_profile "github.com/anandadwipra/SVM/internal/profile"
+	file "github.com/anandadwipra/SVM/pkg/general"
 )
 
 func init() {
 	// fmt.Println("Running Cloud Init")
 }
 
-func createFile(path, filename string) {
-	_, err := os.Stat(path + "/" + filename)
-	if os.IsNotExist(err) {
-		file, err := os.Create(path + "/" + filename)
-		defer file.Close()
-		if err != nil {
-			fmt.Println("Error Bikin file:", err.Error())
-		}
-	}
-	// fmt.Println(err)
-
-}
-
 func metadata(path, hostname string) {
-	createFile(path, "meta-data")
+	file.CreateFile(path, "meta-data")
 	file, err := os.OpenFile(path+"/meta-data", os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -41,7 +29,7 @@ func metadata(path, hostname string) {
 }
 
 func userdata(path, hostname, user, sshpath string) {
-	createFile(path, "user-data")
+	file.CreateFile(path, "user-data")
 
 	file, err := os.OpenFile(path+"/user-data", os.O_WRONLY, 0644)
 	if err != nil {

@@ -41,6 +41,12 @@ func (data *Options) auto_complete() {
 				Sub:   nil,
 				Flags: nil,
 			},
+			"img": {
+				Sub: nil,
+				Flags: map[string]complete.Predictor{
+					"url": predict.Nothing,
+				},
+			},
 		},
 		Flags: map[string]complete.Predictor{
 			"test": predict.Something,

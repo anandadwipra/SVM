@@ -15,12 +15,12 @@ import (
 
 // the option should be in its own internal package?
 type Options struct {
-	cmd                                                  *complete.Command
-	name, base_image, network1, network2, network3, user string
-	cpu, mem, storage                                    int
-	all, off                                             bool
-	create, delete, initialize, profile, list            *flag.FlagSet
-	config                                               *svm_profile.Profile
+	cmd                                                       *complete.Command
+	name, base_image, network1, network2, network3, user, url string
+	cpu, mem, storage                                         int
+	all, off                                                  bool
+	create, delete, initialize, profile, list, img            *flag.FlagSet
+	config                                                    *svm_profile.Profile
 }
 
 type Svm struct {
@@ -33,8 +33,9 @@ func (data Options) desc() {
       create
       delete
       init 
-      profile 
+      img
       list
+      profile 
     Get Help:
       vm [OPTIONS] --help`)
 	os.Exit(1)
@@ -110,6 +111,15 @@ func (data *Options) Get() {
 		} else {
 			svm.Profile()
 		}
+	case "img":
+		data.Img()
+		data.img.Parse(os.Args[2:])
+		if data.url == "" {
+			fmt.Println("Usage of image:")
+			data.img.PrintDefaults()
+		} else {
+			svm.Img(*data)
+		}
 	default:
 		// fmt.Println("Default ni boss")
 		data.desc()
@@ -152,6 +162,12 @@ func (data *Options) List() {
 // Parse Profile Argument to variable
 func (data *Options) Profile() {
 	data.profile = flag.NewFlagSet("profile", flag.ExitOnError)
+}
+
+// Parse Img Argument to variable
+func (data *Options) Img() {
+	data.img = flag.NewFlagSet("profile", flag.ExitOnError)
+	data.img.StringVar(&data.url, "url", "", "Url to download image")
 }
 
 // func (data *Options) Switch() {
