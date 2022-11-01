@@ -13,7 +13,7 @@ import (
 // 	ssh_path, workdir string
 // }
 
-// Option harusnya dalam package internal tersendiri?
+// the option should be in its own internal package?
 type Options struct {
 	cmd                                                  *complete.Command
 	name, base_image, network1, network2, network3, user string
@@ -59,7 +59,7 @@ func (data *Options) Get() {
 			fmt.Println("Usage of create:")
 			data.create.PrintDefaults()
 		} else {
-			svm.Create()
+			svm.Create(*data)
 		}
 
 		// Delete Command
