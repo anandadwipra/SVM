@@ -61,9 +61,10 @@ runcmd:
 	file.Sync()
 }
 
-func New(profile svm_profile.Profile, hostname string) {
-	pathname := fmt.Sprintf("%s/vms/%s", profile.Workdir, hostname)
+func New(profile svm_profile.Profile, hostname string) (pathname string) {
+	pathname = fmt.Sprintf("%s/vms/%s", profile.Workdir, hostname)
 	os.MkdirAll(pathname, os.ModePerm)
 	metadata(pathname, hostname)
 	userdata(pathname, hostname, profile.Default_user, profile.Ssh_path)
+	return
 }

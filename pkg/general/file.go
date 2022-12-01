@@ -11,9 +11,7 @@ func CreateFile(path, filename string) {
 		file, err := os.Create(path + "/" + filename)
 		defer file.Close()
 		if err != nil {
-			fmt.Println("Error Bikin file:", err.Error())
+			fmt.Printf("Failed to create file: %s", err.Error())
 		}
 	}
-	// fmt.Println(err)
-
 }
